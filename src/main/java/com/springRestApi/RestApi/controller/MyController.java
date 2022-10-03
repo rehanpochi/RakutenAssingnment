@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springRestApi.RestApi.entities.Todo;
@@ -23,18 +24,39 @@ public class MyController {
 		return "This is Home Page";
 	}
 	
-	//Get the todo's
+	//Api-1 : To send all the todo's when called.
 	@GetMapping("/todo")
 	public List<Todo> getTodo(){
 		return this.todoService.getTodo();
 	}
-	
-//	@PostMapping(path="/todoAdd",consumes="application/json")
-	@PostMapping("/todoAdd")
-	public Todo addTodo(@RequestBody Todo todo) {
+
+	//Api 2(a) : To get the data from our Todo flutter app.
+	@PostMapping(path = "/todoAddd", consumes = "application/json")
+	public Todo test(@RequestBody Todo todo) {
 		return this.todoService.addTodo(todo);
 	}
-		
+
+	//Api 2(b) : To get the data from our Todo flutter app.
+	@PostMapping(path = "/todoAddd", consumes = "application/x-www-form-urlencoded")
+	public Todo testt(Todo todo) {
+	  return this.todoService.addTodo(todo);
+	}
+	
+	//Api 3() : To delete the data from out Todo flutter app.
+
+	
+	// Below code is for personal refrence.
+	
+//	@PostMapping(path="/todoAdd",consumes="application/json")
+//	@PostMapping("/todoAdd")
+//	public Todo addTodo(@RequestBody Todo todo) {
+//		return this.todoService.addTodo(todo);
+//	}
+	
+	
+//	@RequestMapping(value = "/todoAddd", method = RequestMethod.POST,
+//	        consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, 
+//	        produces = {MediaType.APPLICATION_JSON_VALUE})
 }
 
 //@Autowired
